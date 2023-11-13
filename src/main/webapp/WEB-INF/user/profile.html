@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+
+</head>
+<style>
+    /* style.css */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        width: 50%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td:first-child {
+        font-weight: bold;
+    }
+
+</style>
+<body>
+
+<div class="container">
+    <h2>Information</h2>
+    <table>
+        <tbody th:object="${user}">
+        <tr >
+            <td>ID:</td>
+            <td th:text="${user.id}"></td> <!-- Замени на фактический ID пользователя -->
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${user.name}"></td> <!-- Замени на фактическое имя пользователя -->
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td th:text="${user.age}"></td> <!-- Замени на фактический возраст пользователя -->
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td th:text="${user.email}"></td> <!-- Замени на фактический email пользователя -->
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td th:text="${user.getAuthorities()}"></td> <!-- Замени на фактическую роль пользователя -->
+        </tr>
+
+
+    <button><a th:href="@{/logout}">LOG OUT</a></button>
+</div>
+
+</body>
+</html>

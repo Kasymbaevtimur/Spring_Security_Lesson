@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список Приложений</title>
+</head>
+<style>
+  /* style.css */
+  body {
+    background:url("https://img3.akspic.ru/crops/5/4/4/1/5/151445/151445-zemlya-temnota-astronomiya-vselennaya-kosmos-3840x2160.jpg") ;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .container {
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #4caf50;
+    color: #fff;
+  }
+
+</style>
+<body>
+<div class="container">
+  <h2>Users</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>USER NAME</th>
+      <th>AGE</th>
+      <th>EMAIL</th>
+      <th>ROLE</th>
+      <th sec:authorize="hasAuthority('ADMIN')" >DELETE</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Здесь будет генерироваться список данных -->
+    <tr th:each="user:${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"/>
+      <td th:text="${user.age}"/>
+      <td th:text="${user.email}"/>
+      <td th:text="${user.getAuthorities()}"/>
+      <td sec:authorize="hasAuthority('ADMIN')">
+        <a   th:href="@{/delete/{id}(id=${user.id})}">DELETE</a>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a href="/profile">Profile</a>
+
+</div>
+</body>
+</html>
